@@ -1,0 +1,10 @@
+* add udp support
+* code&syntax cleanup
+* add pipes between sessions
+* add ssl support
+* add file pipes
+* run connections in a separate thread?
+* add clear log
+* make all strings translatable
+* add rename tab
+* add right click context menu on tab area and tab handles

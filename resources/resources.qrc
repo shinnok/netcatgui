@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/toolbar">
+        <file>icons/connect.png</file>
+        <file>icons/listen.png</file>
+        <file>icons/save.png</file>
+    </qresource>
+</RCC>
