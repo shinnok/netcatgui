@@ -57,7 +57,10 @@ qmake netcatqui.pro
 make (or mingw32-make or nmake or jom, depending on your platform)
 
 Installing(on *NIX):
-make install
+make install //not implemented
+
+To clean the build directory:
+make clean && make distclean
 
 Documentation
 -------------
