@@ -160,7 +160,7 @@ void NcSessionListenWidget::sendMessageToClient()
     if(!message.isEmpty()){
         if(getEndMessagesWithNewLine())
             message.append("\n");
-        hostConnection->write(message.toAscii());
+        hostConnection->write(message.toLatin1());
     }
     ui->userInputPlainTextEdit->clear();
 }
