@@ -199,12 +199,12 @@ void NetcatGUI::ncSaveLog()
         return;
     }
     QString log = "--\n[" + QTime::currentTime().toString(Qt::SystemLocaleShortDate) + " " + QDate::currentDate().toString(Qt::SystemLocaleShortDate)
-                  + "]" + "\nNetcatGUI log session for " + static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->getSessionName() + "\n---\n" + static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->getSessionLog().toAscii() + "\n-----";
-    qint64 bytesWritten = logFile.write(log.toAscii());
+                  + "]" + "\nNetcatGUI log session for " + static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->getSessionName() + "\n---\n" + static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->getSessionLog().toLatin1() + "\n-----";
+    qint64 bytesWritten = logFile.write(log.toLatin1());
     if( bytesWritten ==  -1)
         QMessageBox::critical(this, "File write error", "Could not write to the specified file.\n Log not saved.");
     else
-        if( bytesWritten != qstrlen(log.toAscii()))
+        if( bytesWritten != qstrlen(log.toLatin1()))
         QMessageBox::critical(this, "File write error", "Could not write the entire log session.\n Log saved partially.");
     else
         QMessageBox::information(this, "Log saved successfully", "The session log has been saved successfully.");

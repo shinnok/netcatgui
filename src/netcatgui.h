@@ -1,8 +1,9 @@
 #ifndef NETCATGUI_H
 #define NETCATGUI_H
 
-#include <QtGui/QMainWindow>
 #include "widgets/ncsessionwidget.h"
+
+#include <QMainWindow>
 
 namespace Ui
 {
