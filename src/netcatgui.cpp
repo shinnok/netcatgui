@@ -81,6 +81,19 @@ NetcatGUI::~NetcatGUI()
     delete ui;
 }
 
+NcSessionWidget::Encoding NetcatGUI::currentEncoding()
+{
+    if (ui->actionEncodingLatin1->isChecked())
+        return NcSessionWidget::Latin1;
+    else if (ui->actionEncodingUTF8->isChecked())
+        return NcSessionWidget::Utf8;
+    else if (ui->actionEncodingSystem->isChecked())
+        return NcSessionWidget::System;
+    else {
+        return NcSessionWidget::Utf8;
+    }
+}
+
 void NetcatGUI::ncQuit()
 {
     qApp->quit();
@@ -88,14 +101,16 @@ void NetcatGUI::ncQuit()
 
 void NetcatGUI::ncAddNewListenTab()
 {
-    NcSessionListenWidget *widget = new NcSessionListenWidget(this, ui->actionEnd_Messages_with_new_line->isChecked());
-    ui->tabWidget->addTab(widget, QIcon(":/toolbar/icons/listen.png"), "Listen");
+    NcSessionListenWidget *widget = new NcSessionListenWidget(this, ui->actionEnd_Messages_with_new_line->isChecked(), currentEncoding());
+    ui->tabWidget->addTab(widget, QIcon(":/toolbar/icons/listen.png"), widget->getSessionName());
+    ui->tabWidget->setCurrentWidget(widget);
 }
 
 void NetcatGUI::ncAddNewConnectTab()
 {
-    NcSessionConnectWidget *widget = new NcSessionConnectWidget(this, ui->actionEnd_Messages_with_new_line->isChecked());
-    ui->tabWidget->addTab(widget, QIcon(":/toolbar/icons/connect.png"), "Connect");
+    NcSessionConnectWidget *widget = new NcSessionConnectWidget(this, ui->actionEnd_Messages_with_new_line->isChecked(), currentEncoding());
+    ui->tabWidget->addTab(widget, QIcon(":/toolbar/icons/connect.png"), widget->getSessionName());
+    ui->tabWidget->setCurrentWidget(widget);
 }
 
 void NetcatGUI::ncTabCloseRequest(int i)
@@ -157,20 +172,14 @@ void NetcatGUI::ncSend()
 void NetcatGUI::ncEndMessagesNewLineTriggered(bool checked)
 {
     static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->updateEndMessagesWithNewLine(checked);
+    ncupdateTabStatus();
 }
 
 void NetcatGUI::ncEncodingTriggered(QAction* action)
 {
-    auto encoding = NcSessionWidget::Utf8;
-
-    if (action == ui->actionEncodingLatin1)
-        encoding = NcSessionWidget::Latin1;
-    else if (action == ui->actionEncodingUTF8)
-        encoding = NcSessionWidget::Utf8;
-    else if (action == ui->actionEncodingSystem)
-        encoding = NcSessionWidget::System;
-
-    static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->updateTextEncoding(encoding);
+    Q_UNUSED(action)
+    static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->updateTextEncoding(currentEncoding());
+    ncupdateTabStatus();
 }
 
 void NetcatGUI::ncAbout()
@@ -197,8 +206,15 @@ void NetcatGUI::ncCurrentTabChanged(int i)
 
 void NetcatGUI::ncupdateTabStatus()
 {
-    ui->statusBar->showMessage(static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->getStatusMessage());
-    ui->tabWidget->setTabText(ui->tabWidget->currentIndex(), static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->getSessionName());
+    auto* currentSession = dynamic_cast<NcSessionWidget*>(ui->tabWidget->currentWidget());
+    if(currentSession != nullptr)
+    {
+        if(currentSession->getEndMessagesWithNewLine())
+            ui->statusBar->showMessage(currentSession->getStatusMessage() + tr(" (%1, CRLF)").arg(currentSession->getTextEncodingName()));
+        else
+            ui->statusBar->showMessage(currentSession->getStatusMessage() + tr(" (%1)").arg(currentSession->getTextEncodingName()));
+        ui->tabWidget->setTabText(ui->tabWidget->currentIndex(), currentSession->getSessionName());
+    }
 }
 
 void NetcatGUI::ncSaveLog()

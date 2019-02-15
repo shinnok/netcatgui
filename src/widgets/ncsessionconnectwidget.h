@@ -9,7 +9,7 @@ class NcSessionConnectWidget : public NcSessionWidget
     Q_OBJECT
 
 public:
-    NcSessionConnectWidget(QWidget *parent = 0, bool EndMessagesWithNewLine = false);
+    NcSessionConnectWidget(QWidget *parent = 0, bool EndMessagesWithNewLine = false, Encoding encoding = Encoding::Utf8);
     ~NcSessionConnectWidget();
 
 private slots:

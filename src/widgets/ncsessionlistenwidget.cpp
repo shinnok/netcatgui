@@ -3,8 +3,8 @@
 #include <QMessageBox>
 #include <QLineEdit>
 
-NcSessionListenWidget::NcSessionListenWidget(QWidget *parent, bool EndMessagesWithNewLine):
-                                             NcSessionWidget(parent, EndMessagesWithNewLine), hostConnection(NULL)
+NcSessionListenWidget::NcSessionListenWidget(QWidget *parent, bool EndMessagesWithNewLine, Encoding encoding):
+                                             NcSessionWidget(parent, EndMessagesWithNewLine, encoding), hostConnection(NULL)
 {
     setSessionName("Listen");
     setStatusMessage("Disconnected");

@@ -25,6 +25,7 @@ private:
     QActionGroup* encodingGroup;
 
 private slots:
+    NcSessionWidget::Encoding currentEncoding();
     void ncAddNewListenTab();
     void ncAddNewConnectTab();
     void ncTabCloseRequest(int i);

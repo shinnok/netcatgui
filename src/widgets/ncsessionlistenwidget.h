@@ -11,7 +11,7 @@ class NcSessionListenWidget : public NcSessionWidget
     Q_OBJECT
 
 public:
-    NcSessionListenWidget(QWidget *parent = 0, bool EndMessagesWithNewLine = false);
+    NcSessionListenWidget(QWidget *parent = 0, bool EndMessagesWithNewLine = false, Encoding encoding = Encoding::Utf8);
     ~NcSessionListenWidget();
 
 private slots:

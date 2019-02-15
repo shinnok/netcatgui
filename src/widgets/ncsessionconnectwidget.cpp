@@ -4,8 +4,8 @@
 #include <QHostAddress>
 #include <QLineEdit>
 
-NcSessionConnectWidget::NcSessionConnectWidget(QWidget *parent, bool EndMessagesWithNewLine):
-                                               NcSessionWidget(parent, EndMessagesWithNewLine)
+NcSessionConnectWidget::NcSessionConnectWidget(QWidget *parent, bool EndMessagesWithNewLine, NcSessionWidget::Encoding encoding):
+                                               NcSessionWidget(parent, EndMessagesWithNewLine, encoding)
 {
     setSessionName("Connect");
     setStatusMessage("Disconnected");

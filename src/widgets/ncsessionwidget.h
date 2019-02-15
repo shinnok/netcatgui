@@ -33,6 +33,7 @@ public:
     void updateTextEncoding(Encoding encoding);
     bool getEndMessagesWithNewLine();
     Encoding getTextEncoding();
+    QString  getTextEncodingName();
 
 public slots:
     virtual void Connect();

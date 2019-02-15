@@ -34,6 +34,19 @@ NcSessionWidget::Encoding NcSessionWidget::getTextEncoding()
     return text_encoding;
 }
 
+QString NcSessionWidget::getTextEncodingName()
+{
+    switch (getTextEncoding())
+    {
+    case Latin1:
+        return tr("Latin-1");
+    case Utf8:
+        return tr("UTF-8");
+    case System:
+        return tr("System");
+    }
+}
+
 QString NcSessionWidget::getStatusMessage()
 {
     return statusMessage;
