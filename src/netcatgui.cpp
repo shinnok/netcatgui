@@ -156,9 +156,7 @@ void NetcatGUI::ncSend()
 
 void NetcatGUI::ncEndMessagesNewLineTriggered(bool checked)
 {
-    for(int i = 0; i < ui->tabWidget->count(); i++)
-        static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->updateEndMessagesWithNewLine(checked);
-
+    static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->updateEndMessagesWithNewLine(checked);
 }
 
 void NetcatGUI::ncEncodingTriggered(QAction* action)
@@ -172,8 +170,7 @@ void NetcatGUI::ncEncodingTriggered(QAction* action)
     else if (action == ui->actionEncodingSystem)
         encoding = NcSessionWidget::System;
 
-    for(int i = 0; i < ui->tabWidget->count(); i++)
-        static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->updateTextEncoding(encoding);
+    static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->updateTextEncoding(encoding);
 }
 
 void NetcatGUI::ncAbout()
