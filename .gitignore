@@ -10,3 +10,4 @@ moc_*.cpp
 moc_*.h
 qrc_resources.cpp
 .qmake.stash
+build-netcatgui-*
