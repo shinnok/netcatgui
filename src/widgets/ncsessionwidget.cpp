@@ -1,7 +1,7 @@
 #include "ncsessionwidget.h"
 
 NcSessionWidget::NcSessionWidget(QWidget *parent, bool EndMessagesWithNewLine, Encoding encoding)
-    : ui(new Ui::NcSessionWidget), end_messages_with_newline(EndMessagesWithNewLine), text_encoding(encoding)
+    : QWidget(parent), ui(new Ui::NcSessionWidget), end_messages_with_newline(EndMessagesWithNewLine), text_encoding(encoding)
 {
     ui->setupUi(this);
     ui->sendButton->setEnabled(false);
