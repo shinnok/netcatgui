@@ -109,7 +109,7 @@ void NcSessionListenWidget::hostDisconnect()
     }
 
     hostConnection->close();
-    free(hostConnection);
+    delete hostConnection;
     hostConnection = NULL;
     setStatusMessage("Listening");
     emit statusChanged();
