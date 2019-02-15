@@ -14,7 +14,14 @@ class NcSessionWidget : public QWidget
     Q_OBJECT
 
 public:
-    NcSessionWidget(QWidget *parent = 0, bool EndMessagesWithNewLine = false);
+    enum Encoding
+    {
+        Latin1,
+        Utf8,
+        System
+    };
+
+    NcSessionWidget(QWidget *parent = 0, bool EndMessagesWithNewLine = false, Encoding encoding = Utf8);
     ~NcSessionWidget();
     QString getStatusMessage();
     QString getSessionName();
@@ -23,7 +30,9 @@ public:
     void paste();
     void copy();
     void updateEndMessagesWithNewLine(bool checked);
+    void updateTextEncoding(Encoding encoding);
     bool getEndMessagesWithNewLine();
+    Encoding getTextEncoding();
 
 public slots:
     virtual void Connect();
@@ -45,6 +54,7 @@ private:
     QString statusMessage;
 
     bool    end_messages_with_newline;
+    Encoding text_encoding;
 };
 
 #endif // NC_SESSION_WIDGET_H

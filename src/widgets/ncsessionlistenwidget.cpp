@@ -160,7 +160,19 @@ void NcSessionListenWidget::sendMessageToClient()
     if(!message.isEmpty()){
         if(getEndMessagesWithNewLine())
             message.append("\n");
-        hostConnection->write(message.toLatin1());
+        QByteArray messageData;
+        switch (getTextEncoding()) {
+        case Latin1:
+            messageData = message.toLatin1();
+            break;
+        case Utf8:
+            messageData = message.toUtf8();
+            break;
+        case System:
+            messageData = message.toLocal8Bit();
+            break;
+        }
+        hostConnection->write(messageData);
     }
     ui->userInputPlainTextEdit->clear();
 }

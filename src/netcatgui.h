@@ -4,6 +4,7 @@
 #include "widgets/ncsessionwidget.h"
 
 #include <QMainWindow>
+#include <QActionGroup>
 
 namespace Ui
 {
@@ -21,6 +22,7 @@ public:
 private:
     Ui::NetcatGUI *ui;
     QWidget *currentTab;
+    QActionGroup* encodingGroup;
 
 private slots:
     void ncAddNewListenTab();
@@ -32,6 +34,7 @@ private slots:
     void ncDisconnect();
     void ncSend();
     void ncEndMessagesNewLineTriggered(bool checked);
+    void ncEncodingTriggered(QAction* action);
     void ncCurrentTabChanged(int i);
     void ncupdateTabStatus();
     void ncSaveLog();

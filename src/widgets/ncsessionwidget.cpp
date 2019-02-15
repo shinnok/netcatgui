@@ -1,7 +1,7 @@
 #include "ncsessionwidget.h"
 
-NcSessionWidget::NcSessionWidget(QWidget *parent, bool EndMessagesWithNewLine)
-    : ui(new Ui::NcSessionWidget), end_messages_with_newline(EndMessagesWithNewLine)
+NcSessionWidget::NcSessionWidget(QWidget *parent, bool EndMessagesWithNewLine, Encoding encoding)
+    : ui(new Ui::NcSessionWidget), end_messages_with_newline(EndMessagesWithNewLine), text_encoding(encoding)
 {
     ui->setupUi(this);
     ui->sendButton->setEnabled(false);
@@ -19,9 +19,19 @@ void NcSessionWidget::updateEndMessagesWithNewLine(bool checked)
     end_messages_with_newline = checked;
 }
 
+void NcSessionWidget::updateTextEncoding(Encoding encoding)
+{
+    text_encoding = encoding;
+}
+
 bool NcSessionWidget::getEndMessagesWithNewLine()
 {
     return end_messages_with_newline;
+}
+
+NcSessionWidget::Encoding NcSessionWidget::getTextEncoding()
+{
+    return text_encoding;
 }
 
 QString NcSessionWidget::getStatusMessage()

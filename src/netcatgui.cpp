@@ -31,6 +31,13 @@ NetcatGUI::NetcatGUI(QWidget *parent)
     ui->mainToolBar->addAction(newListen);
     ui->mainToolBar->addAction(saveLog);
 
+    encodingGroup = new QActionGroup(this);
+    encodingGroup->addAction(ui->actionEncodingLatin1);
+    encodingGroup->addAction(ui->actionEncodingUTF8);
+    encodingGroup->addAction(ui->actionEncodingSystem);
+
+    ui->actionEncodingUTF8->setChecked(true);
+
     QObject::connect(newListen, SIGNAL(triggered()), this, SLOT(ncAddNewListenTab()));
     QObject::connect(newConnect, SIGNAL(triggered()), this, SLOT(ncAddNewConnectTab()));
     QObject::connect(saveLog, SIGNAL(triggered()), this, SLOT(ncSaveLog()));
@@ -51,6 +58,8 @@ NetcatGUI::NetcatGUI(QWidget *parent)
     QObject::connect(ui->actionSend, SIGNAL(triggered()), this, SLOT(ncSend()));
 
     QObject::connect(ui->actionEnd_Messages_with_new_line, SIGNAL(triggered(bool)), this, SLOT(ncEndMessagesNewLineTriggered(bool)));
+
+    QObject::connect(encodingGroup, SIGNAL(triggered(QAction*)), this, SLOT(ncEncodingTriggered(QAction*)));
 
     QObject::connect(ui->tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(ncTabCloseRequest(int)));
     QObject::connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(ncCurrentTabChanged(int)));
@@ -150,6 +159,21 @@ void NetcatGUI::ncEndMessagesNewLineTriggered(bool checked)
     for(int i = 0; i < ui->tabWidget->count(); i++)
         static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->updateEndMessagesWithNewLine(checked);
 
+}
+
+void NetcatGUI::ncEncodingTriggered(QAction* action)
+{
+    auto encoding = NcSessionWidget::Utf8;
+
+    if (action == ui->actionEncodingLatin1)
+        encoding = NcSessionWidget::Latin1;
+    else if (action == ui->actionEncodingUTF8)
+        encoding = NcSessionWidget::Utf8;
+    else if (action == ui->actionEncodingSystem)
+        encoding = NcSessionWidget::System;
+
+    for(int i = 0; i < ui->tabWidget->count(); i++)
+        static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->updateTextEncoding(encoding);
 }
 
 void NetcatGUI::ncAbout()
