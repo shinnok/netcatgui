@@ -1,4 +1,12 @@
+# macOS
+*.user
+.DS_Store
+# object files
+*.o
+# auto-generated Qt files
 Makefile
-Makefile.Debug
-Makefile.Release
 ui_*.h
+moc_*.cpp
+moc_*.h
+qrc_resources.cpp
+.qmake.stash
