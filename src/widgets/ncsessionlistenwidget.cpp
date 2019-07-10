@@ -33,6 +33,9 @@ NcSessionListenWidget::NcSessionListenWidget(QWidget *parent, bool EndMessagesWi
     QObject::connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(sendMessageToClient()));
     /*tcp listen server setup*/
     connect(&tcpListenServer, SIGNAL(newConnection()), this, SLOT(acceptConnection()));
+
+    ui->clearButton->setText("Clear");
+    QObject::connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(ClearSessionPlainTextEdit()));
 }
 
 NcSessionListenWidget::~NcSessionListenWidget()

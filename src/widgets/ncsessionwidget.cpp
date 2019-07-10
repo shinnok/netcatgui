@@ -108,3 +108,8 @@ void NcSessionWidget::SendMessage()
     this->ui->sendButton->animateClick();
 }
 
+void NcSessionWidget::ClearSessionPlainTextEdit()
+{
+    ui->sessionPlainTextEdit->clear();
+}
+
