@@ -23,6 +23,9 @@ NcSessionConnectWidget::NcSessionConnectWidget(QWidget *parent, bool EndMessages
     QObject::connect(&hostConnection, SIGNAL(connected()), this, SLOT(connectSuccess()));
     QObject::connect(&hostConnection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(connectFailure(QAbstractSocket::SocketError)));
     QObject::connect(&hostConnection, SIGNAL(readyRead()), this, SLOT(connectionDataAvailable()));
+
+    ui->clearButton->setText("Clear");
+    QObject::connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(ClearSessionPlainTextEdit()));
 }
 
 NcSessionConnectWidget::~NcSessionConnectWidget()

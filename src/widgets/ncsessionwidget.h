@@ -39,6 +39,7 @@ public slots:
     virtual void Connect();
     virtual void Disconnect();
     virtual void SendMessage();
+    virtual void ClearSessionPlainTextEdit();
 
 protected:
     void setSessionName(QString host);
