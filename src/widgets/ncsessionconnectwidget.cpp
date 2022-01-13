@@ -21,7 +21,7 @@ NcSessionConnectWidget::NcSessionConnectWidget(QWidget *parent, bool EndMessages
     QObject::connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(sendMessageToHost()));
     /*host connection setup*/
     QObject::connect(&hostConnection, SIGNAL(connected()), this, SLOT(connectSuccess()));
-    QObject::connect(&hostConnection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(connectFailure(QAbstractSocket::SocketError)));
+    QObject::connect(&hostConnection, SIGNAL(errorOccured(QAbstractSocket::SocketError)), this, SLOT(connectFailure(QAbstractSocket::SocketError)));
     QObject::connect(&hostConnection, SIGNAL(readyRead()), this, SLOT(connectionDataAvailable()));
 }
 

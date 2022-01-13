@@ -9,6 +9,7 @@
 #include <QAction>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QLocale>
 #include <QTime>
 #include <QIcon>
 
@@ -235,7 +236,7 @@ void NetcatGUI::ncSaveLog()
         QMessageBox::critical(this, "File open error", "The selected file could not be opened for writing.\n Log not saved.");
         return;
     }
-    QString log = "--\n[" + QTime::currentTime().toString(Qt::SystemLocaleShortDate) + " " + QDate::currentDate().toString(Qt::SystemLocaleShortDate)
+    QString log = "--\n[" + QLocale().toString(QTime::currentTime(),QLocale::ShortFormat) + " " + QLocale().toString(QDate::currentDate(),QLocale::ShortFormat)
                   + "]" + "\nNetcatGUI log session for " + static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->getSessionName() + "\n---\n" + static_cast<NcSessionWidget*>(ui->tabWidget->currentWidget())->getSessionLog().toLatin1() + "\n-----";
     qint64 bytesWritten = logFile.write(log.toLatin1());
     if( bytesWritten ==  -1)

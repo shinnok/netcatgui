@@ -137,7 +137,7 @@ void NcSessionListenWidget::acceptConnection()
 {
     hostConnection = tcpListenServer.nextPendingConnection();
     QObject::connect(hostConnection, SIGNAL(readyRead()), this, SLOT(connectionDataAvailable()));
-    QObject::connect(hostConnection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(hostConnectionError(QAbstractSocket::SocketError)));
+    QObject::connect(hostConnection, SIGNAL(errorOccurred(QAbstractSocket::SocketError)), this, SLOT(hostConnectionError(QAbstractSocket::SocketError)));
 
     setStatusMessage("Connected");
     emit statusChanged();

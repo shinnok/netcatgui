@@ -45,6 +45,8 @@ QString NcSessionWidget::getTextEncodingName()
     case System:
         return tr("System");
     }
+
+    return "";
 }
 
 QString NcSessionWidget::getStatusMessage()
